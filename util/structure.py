@@ -1,11 +1,25 @@
+"""
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Proyecto Final de Compiladores
+Módulo | `structure.py`
+
+Daniel Bakas Amuchástegui   | A01657103
+Santiago Hernández Guerrero | A01027543
+
+Abril 19, 2022
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+
 from collections import MutableMapping, OrderedDict
 import unittest
 
 
 _allClasses = {}
 
+
 class HierarchyException(Exception):
     pass
+
 
 def lookupClass(name):
     return _allClasses[name]
@@ -16,12 +30,14 @@ class Method():
     Se usa una tabla de símbolos lineal para
     almacenar los tipos de los parámetros.
     """
+
     def __init__(self, type, params=None):
         self.type = type
         self.params = SymbolTable()
         if params:
             for x, y in params:
                 self.params[x] = y
+
 
 class Klass():
     """
@@ -93,12 +109,14 @@ class Klass():
             return True
         else:
             return self.conforms(lookupClass(B.inherits))
-        
+
+
 class SymbolTable(MutableMapping):
     """
     La diferencia entre una tabla de símbolos y un dict es que si la
     llave ya está en la tabla, entonces se debe lanzar excepción.
     """
+
     def __init__(self):
         self.dict = OrderedDict()
 
@@ -109,7 +127,7 @@ class SymbolTable(MutableMapping):
         """Aquí, si key ya está, regresar excepción"""
         if key in self.dict:
             raise KeyError(key)
-        self.dict[key] = value 
+        self.dict[key] = value
 
     def __delitem__(self, key):
         del self.dict[key]
@@ -129,11 +147,12 @@ class SymbolTableWithScopes(MutableMapping):
     Esta versión de tabla de símbolos maneja scopes mediante una pila,
     guarda en el scope activo y busca en los superiores.
     """
+
     def __init__(self, klass):
         self.dict_list = [{}]
         self.last = 0
         self.klass = klass
-    
+
     def __getitem__(self, key):
         for i in reversed(range(self.last+1)):
             if key in self.dict_list[i].keys():
@@ -167,9 +186,11 @@ class SymbolTableWithScopes(MutableMapping):
     def __repr__(self):
         return self.dict_list.__repr__()
 
+
 class PruebasDeEstructura(unittest.TestCase):
     def setUp(self):
-        self.k = [Klass("A"), Klass("B", "A"), Klass("C", "B"), Klass("Z", "B")]
+        self.k = [Klass("A"), Klass("B", "A"),
+                  Klass("C", "B"), Klass("Z", "B")]
 
     def test1(self):
         self.k[0].addAttribute("a", "Integer")
@@ -207,6 +228,7 @@ class PruebasDeEstructura(unittest.TestCase):
         self.assertTrue(self.k[0].conforms(self.k[2]))
         self.assertFalse(self.k[2].conforms(self.k[1]))
 
+
 class PruebasConTablaLineal(unittest.TestCase):
     # Corre antes de cada método de prueba
     def setUp(self):
@@ -232,6 +254,7 @@ class PruebasConTablaLineal(unittest.TestCase):
         self.st['hola'] = 'mundo'
         with self.assertRaises(KeyError):
             self.st['hola'] = 'mundo'
+
 
 class PruebasConScopes(unittest.TestCase):
     def setUp(self):
@@ -279,6 +302,7 @@ class PruebasConScopes(unittest.TestCase):
         self.st.closeScope()
         self.assertEquals(self.st['hola'], 'scope0')
 
+
 def setBaseClasses():
     k = Klass('Object')
     k.addMethod('abort', Method('Object'))
@@ -300,6 +324,7 @@ def setBaseClasses():
     _allClasses['String'] = k
     k = Klass('Bool')
     _allClasses['String'] = k
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

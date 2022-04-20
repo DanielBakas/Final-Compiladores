@@ -1,4 +1,4 @@
-# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto/antlr/cool.g4 by ANTLR 4.9.3
+# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto Final/antlr/cool.g4 by ANTLR 4.9.3
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO

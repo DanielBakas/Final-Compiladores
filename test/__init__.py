@@ -9,3 +9,7 @@ Santiago Hernández Guerrero | A01027543
 Abril 19, 2022
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 """
+
+from . import *
+
+from .semantic_one_test import *

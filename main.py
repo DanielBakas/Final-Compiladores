@@ -19,6 +19,7 @@ def compile(file):
     parser = coolParser(CommonTokenStream(coolLexer(FileStream(file))))
     tree = parser.program()
     walker = ParseTreeWalker()
+    walker.walk(anattributenamedselfListener(), tree)
     walker.walk(nomainListener(), tree)
 
 

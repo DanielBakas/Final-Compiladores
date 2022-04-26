@@ -1,7 +1,7 @@
 """
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Proyecto Final de Compiladores
-Módulo | `mainListener.py`
+Módulo | `nomainListener.py`
 
 Daniel Bakas Amuchástegui   | A01657103
 Santiago Hernández Guerrero | A01027543
@@ -16,7 +16,7 @@ from antlr.coolListener import coolListener
 from antlr.coolParser import coolParser
 
 
-class mainListener(coolListener):
+class nomainListener(coolListener):
 
     def __init__(self):
         self.main = False

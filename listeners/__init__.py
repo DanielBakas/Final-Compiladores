@@ -10,8 +10,6 @@ Abril 19, 2022
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 """
 
-Hola
-
 from . import *
 
 from .anattributenamedselfListener import *

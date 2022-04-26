@@ -19,8 +19,13 @@ class coolVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by coolParser#feature.
-    def visitFeature(self, ctx:coolParser.FeatureContext):
+    # Visit a parse tree produced by coolParser#method.
+    def visitMethod(self, ctx:coolParser.MethodContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#attribute.
+    def visitAttribute(self, ctx:coolParser.AttributeContext):
         return self.visitChildren(ctx)
 
 

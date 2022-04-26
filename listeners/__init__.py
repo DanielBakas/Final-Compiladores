@@ -12,5 +12,4 @@ Abril 19, 2022
 
 from . import *
 
-from .anattributenamedselfListener import *
-from .nomainListener import *
+from .MainListener import *

@@ -5,8 +5,8 @@ program: ( klass ';')*;
 klass: KLASS TYPE ( 'inherits' TYPE)? '{' ( feature ';')* '}';
 
 feature:
-	ID '(' (params += formal (',' params += formal)*)? ')' ':' TYPE '{' expr '}'
-	| ID ':' TYPE ( '<-' expr)?;
+	ID '(' (params += formal (',' params += formal)*)? ')' ':' TYPE '{' expr '}'	# method
+	| ID ':' TYPE ( '<-' expr)?														# attribute;
 
 formal: ID ':' TYPE;
 

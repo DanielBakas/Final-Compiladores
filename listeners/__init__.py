@@ -13,3 +13,4 @@ Abril 19, 2022
 from . import *
 
 from .MainListener import *
+from .SecondListener import *

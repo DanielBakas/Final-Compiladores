@@ -11,13 +11,9 @@ Abril 19, 2022
 """
 import pytest
 
-from main import dummy
-from main import compile
+from main import *
 from util.exceptions import *
 
-def test_badarith():
-    with pytest.raises(badarith):
-        compile('resources/semantic/input/badarith.cool')
 
 def test_assignnoconform():
     with pytest.raises(assignnoconform):

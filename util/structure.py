@@ -10,16 +10,15 @@ Abril 19, 2022
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 """
 
-from collections import MutableMapping, OrderedDict
+from _collections_abc import MutableMapping
+from collections import OrderedDict
 import unittest
 
 
 _allClasses = {}
 
-
 class HierarchyException(Exception):
     pass
-
 
 def lookupClass(name):
     return _allClasses[name]
@@ -30,14 +29,12 @@ class Method():
     Se usa una tabla de símbolos lineal para
     almacenar los tipos de los parámetros.
     """
-
     def __init__(self, type, params=None):
         self.type = type
         self.params = SymbolTable()
         if params:
             for x, y in params:
                 self.params[x] = y
-
 
 class Klass():
     """
@@ -109,14 +106,12 @@ class Klass():
             return True
         else:
             return self.conforms(lookupClass(B.inherits))
-
-
+        
 class SymbolTable(MutableMapping):
     """
     La diferencia entre una tabla de símbolos y un dict es que si la
     llave ya está en la tabla, entonces se debe lanzar excepción.
     """
-
     def __init__(self):
         self.dict = OrderedDict()
 
@@ -127,7 +122,7 @@ class SymbolTable(MutableMapping):
         """Aquí, si key ya está, regresar excepción"""
         if key in self.dict:
             raise KeyError(key)
-        self.dict[key] = value
+        self.dict[key] = value 
 
     def __delitem__(self, key):
         del self.dict[key]
@@ -147,12 +142,11 @@ class SymbolTableWithScopes(MutableMapping):
     Esta versión de tabla de símbolos maneja scopes mediante una pila,
     guarda en el scope activo y busca en los superiores.
     """
-
     def __init__(self, klass):
         self.dict_list = [{}]
         self.last = 0
         self.klass = klass
-
+    
     def __getitem__(self, key):
         for i in reversed(range(self.last+1)):
             if key in self.dict_list[i].keys():
@@ -186,11 +180,10 @@ class SymbolTableWithScopes(MutableMapping):
     def __repr__(self):
         return self.dict_list.__repr__()
 
-
 class PruebasDeEstructura(unittest.TestCase):
     def setUp(self):
-        self.k = [Klass("A"), Klass("B", "A"),
-                  Klass("C", "B"), Klass("Z", "B")]
+        Klass("Object", None)
+        self.k = [Klass("A"), Klass("B", "A"), Klass("C", "B"), Klass("Z", "B")]
 
     def test1(self):
         self.k[0].addAttribute("a", "Integer")
@@ -228,7 +221,6 @@ class PruebasDeEstructura(unittest.TestCase):
         self.assertTrue(self.k[0].conforms(self.k[2]))
         self.assertFalse(self.k[2].conforms(self.k[1]))
 
-
 class PruebasConTablaLineal(unittest.TestCase):
     # Corre antes de cada método de prueba
     def setUp(self):
@@ -255,7 +247,6 @@ class PruebasConTablaLineal(unittest.TestCase):
         with self.assertRaises(KeyError):
             self.st['hola'] = 'mundo'
 
-
 class PruebasConScopes(unittest.TestCase):
     def setUp(self):
         k = Klass("Object", None)
@@ -278,7 +269,7 @@ class PruebasConScopes(unittest.TestCase):
 
     def test4(self):
         self.st['hola'] = 'mundo3'
-        self.assertEquals('mundo3', self.st['hola'])
+        self.assertEqual('mundo3', self.st['hola'])
 
     def test5(self):
         with self.assertRaises(KeyError):
@@ -296,35 +287,57 @@ class PruebasConScopes(unittest.TestCase):
         self.st['hola'] = 'scope1'
         self.st.openScope()
         self.st['hola'] = 'scope2'
-        self.assertEquals(self.st['hola'], 'scope2')
+        self.assertEqual(self.st['hola'], 'scope2')
         self.st.closeScope()
-        self.assertEquals(self.st['hola'], 'scope1')
+        self.assertEqual(self.st['hola'], 'scope1')
         self.st.closeScope()
-        self.assertEquals(self.st['hola'], 'scope0')
+        self.assertEqual(self.st['hola'], 'scope0')
+
+class BaseKlasses(unittest.TestCase):
+    def setUp(self):
+        setBaseKlasses()
+    
+    def tearDown(self) -> None:
+        _allClasses = {}
+    
+    def test1(self):
+        io = lookupClass('IO')
+        m = io.lookupMethod('out_int')        
+        self.assertTrue(m.type, 'Int')
+
+    def test2(self):
+        str = lookupClass('String')
+        m = str.lookupMethod('substr')
+        self.assertTrue(m.params['l'], 'Int')
 
 
-def setBaseClasses():
+'''
+Mandar llamar a setBaseKlasses() para crear las declaraciones de las 5 clases básicas
+'''
+def setBaseKlasses():
     k = Klass('Object')
     k.addMethod('abort', Method('Object'))
     k.addMethod('type_name', Method('Object'))
     k.addMethod('copy', Method('SELF_TYPE'))
-    _allClasses['Object'] = k
+    
     k = Klass('IO')
     k.addMethod('out_string', Method('SELF_TYPE', [('x', 'String')]))
     k.addMethod('out_int', Method('SELF_TYPE', [('x', 'Int')]))
     k.addMethod('in_string', Method('String'))
     k.addMethod('in_int', Method('Int'))
-    _allClasses['IO'] = k
+    
     k = Klass('Int')
-    _allClasses['Int'] = k
+    
     k = Klass('String')
     k.addMethod('length', Method('Int'))
     k.addMethod('concat', Method('String', [('s', 'String')]))
     k.addMethod('substr', Method('String', [('i', 'Int'), ('l', 'Int')]))
-    _allClasses['String'] = k
+    
     k = Klass('Bool')
-    _allClasses['String'] = k
-
+    
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
+    '''Para correr estas pruebas unitarias se puede simplemente pytest structure.py
+       Pytest las encuentra aunque están hechas al estilo unittest! Qué bonito es Python ;,,,,D
+    '''

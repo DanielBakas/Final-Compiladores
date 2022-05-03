@@ -20,6 +20,7 @@ def compile(file):
     tree = parser.program()
     walker = ParseTreeWalker()
     walker.walk(MainListener(), tree)
+    walker.walk(SecondListener(), tree)
 
 
 if __name__ == '__main__':

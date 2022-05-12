@@ -11,36 +11,41 @@ feature:
 formal: ID ':' TYPE;
 
 expr:
-	primary
-	| ID '(' ( params += expr ( ',' params += expr)*)? ')' #dispatch
-	| IF expr THEN expr ELSE expr FI #if
-	| WHILE expr LOOP expr POOL #while
-	| expr '.' ID '(' (params += expr ( ',' params += expr)*)? ')' #exprDispatch
-	| LET let_decl ( ',' let_decl)* IN expr #letExpr
-	| CASE expr OF (case_stat)+ ESAC #case
-	| NEW TYPE #newType
-	| '{' ( expr ';')+ '}' #block
+	primary															# base
+	| ID '(' (params += expr ( ',' params += expr)*)? ')'			# dispatch
+	| IF expr THEN expr ELSE expr FI								# if
+	| WHILE expr LOOP expr POOL										# while
+	| expr '.' ID '(' (params += expr ( ',' params += expr)*)? ')'	# exprDispatch
+	| LET let_decl ( ',' let_decl)* IN expr							# letExpr
+	| CASE expr OF (case_stat)+ ESAC								# case
+	| NEW TYPE														# newType
+	| '{' ( expr ';')+ '}'											# block
 	| expr ('@' TYPE)? '.' ID '(' (
 		params += expr ( ',' params += expr)*
-	)? ')' #staticDispatch
-	| '˜' expr #notInt
-	| ISVOID expr #isVoid
-	| expr '*' expr #mult
-	| expr '/' expr #div
-	| expr '+' expr #add
-	| expr '-' expr #sub
-	| expr '<' expr #lt
-	| expr '<=' expr #le
-	| expr '=' expr #eq
-	| 'not' expr #not
-	| <assoc = right> ID '<-' expr #assign
-	; 
+	)? ')'							# staticDispatch
+	| '˜' expr						# notInt
+	| ISVOID expr					# isVoid
+	| expr '*' expr					# mult
+	| expr '/' expr					# div
+	| expr '+' expr					# add
+	| expr '-' expr					# sub
+	| expr '<' expr					# lt
+	| expr '<=' expr				# le
+	| expr '=' expr					# eq
+	| 'not' expr					# not
+	| <assoc = right> ID '<-' expr	# assign;
 
 case_stat: ID ':' TYPE '=>' expr ';';
 
 let_decl: ID ':' TYPE ('<-' expr)?;
 
-primary: '(' expr ')' | ID | INTEGER | STRING | TRUE | FALSE;
+primary:
+	'(' expr ')'	# parenthesis
+	| ID			# id
+	| INTEGER		# int
+	| STRING		# str
+	| TRUE			# true
+	| FALSE			# false;
 
 fragment A: [aA];
 fragment B: [bB];

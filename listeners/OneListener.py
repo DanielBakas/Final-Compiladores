@@ -1,7 +1,7 @@
 """
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Proyecto Final de Compiladores
-Módulo | `MainListener.py`
+Módulo | `OneListener.py`
 
 Daniel Bakas Amuchástegui   | A01657103
 Santiago Hernández Guerrero | A01027543
@@ -16,7 +16,7 @@ from antlr.coolListener import coolListener
 from antlr.coolParser import coolParser
 
 
-class MainListener(coolListener):
+class OneListener(coolListener):
 
     def __init__(self):
         self.className = str()
@@ -26,7 +26,7 @@ class MainListener(coolListener):
     def enterAttribute(self, ctx: coolParser.AttributeContext):
         if ctx.ID().getText() == 'self':
             raise anattributenamedself()
-        if ctx.expr() and ctx.expr().primary() and ctx.expr().primary().getText() == 'self':
+        if ctx.expr() and ctx.expr().getText() == 'self':
             raise selfassignment()
 
     def enterLet_decl(self, ctx: coolParser.Let_declContext):
@@ -42,25 +42,24 @@ class MainListener(coolListener):
                 raise selfinformalparameter()
 
     def enterKlass(self, ctx: coolParser.KlassContext):
-        if ctx.TYPE(0):
-            self.className = ctx.TYPE(0).getText()
+        self.className = ctx.TYPE(0).getText()
+        if ctx.TYPE(1):
+            self.parent = ctx.TYPE(1).getText()
         if self.className == 'Main':
             self.hasMain = True
+
+    def exitKlass(self, ctx: coolParser.KlassContext):
+        if (not self.hasMain):
+            raise nomain()
         elif self.className == 'Int':
             raise badredefineint()
         elif self.className == 'Object':
             raise redefinedobject()
         elif self.className == 'SELF_TYPE':
             raise selftyperedeclared()
-        if ctx.TYPE(1):
-            self.parent = ctx.TYPE(1).getText()
-        if self.parent == 'Bool':
+        elif self.parent == 'Bool':
             raise inheritsbool()
         elif self.parent == 'String':
             raise inheritsstring()
         elif self.parent == 'SELF_TYPE':
             raise inheritsselftype()
-
-    def exitKlass(self, ctx: coolParser.KlassContext):
-        if (not self.hasMain):
-            raise nomain()

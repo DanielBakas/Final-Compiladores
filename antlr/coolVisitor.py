@@ -34,8 +34,108 @@ class coolVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by coolParser#expr.
-    def visitExpr(self, ctx:coolParser.ExprContext):
+    # Visit a parse tree produced by coolParser#add.
+    def visitAdd(self, ctx:coolParser.AddContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#newType.
+    def visitNewType(self, ctx:coolParser.NewTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#sub.
+    def visitSub(self, ctx:coolParser.SubContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#dispatch.
+    def visitDispatch(self, ctx:coolParser.DispatchContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#mult.
+    def visitMult(self, ctx:coolParser.MultContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#lt.
+    def visitLt(self, ctx:coolParser.LtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#while.
+    def visitWhile(self, ctx:coolParser.WhileContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#eq.
+    def visitEq(self, ctx:coolParser.EqContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#letExpr.
+    def visitLetExpr(self, ctx:coolParser.LetExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#div.
+    def visitDiv(self, ctx:coolParser.DivContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#not.
+    def visitNot(self, ctx:coolParser.NotContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#staticDispatch.
+    def visitStaticDispatch(self, ctx:coolParser.StaticDispatchContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#isVoid.
+    def visitIsVoid(self, ctx:coolParser.IsVoidContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#exprDispatch.
+    def visitExprDispatch(self, ctx:coolParser.ExprDispatchContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#le.
+    def visitLe(self, ctx:coolParser.LeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#block.
+    def visitBlock(self, ctx:coolParser.BlockContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#notInt.
+    def visitNotInt(self, ctx:coolParser.NotIntContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#if.
+    def visitIf(self, ctx:coolParser.IfContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#case.
+    def visitCase(self, ctx:coolParser.CaseContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#base.
+    def visitBase(self, ctx:coolParser.BaseContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#assign.
+    def visitAssign(self, ctx:coolParser.AssignContext):
         return self.visitChildren(ctx)
 
 
@@ -49,8 +149,33 @@ class coolVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by coolParser#primary.
-    def visitPrimary(self, ctx:coolParser.PrimaryContext):
+    # Visit a parse tree produced by coolParser#parenthesis.
+    def visitParenthesis(self, ctx:coolParser.ParenthesisContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#id.
+    def visitId(self, ctx:coolParser.IdContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#int.
+    def visitInt(self, ctx:coolParser.IntContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#str.
+    def visitStr(self, ctx:coolParser.StrContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#true.
+    def visitTrue(self, ctx:coolParser.TrueContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by coolParser#false.
+    def visitFalse(self, ctx:coolParser.FalseContext):
         return self.visitChildren(ctx)
 
 

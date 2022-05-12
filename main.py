@@ -12,16 +12,22 @@ Abril 19, 2022
 
 from antlr4 import *
 from antlr import *
-from listeners import *
+from listeners.OneListener import OneListener
+from listeners.TwoListener import TwoListener
+from listeners.PrimaryListener import PrimaryListener
+from util.structure import setBaseKlasses
 
 
 def compile(file):
+
     parser = coolParser(CommonTokenStream(coolLexer(FileStream(file))))
     tree = parser.program()
+    setBaseKlasses()
     walker = ParseTreeWalker()
-    walker.walk(MainListener(), tree)
-    walker.walk(SecondListener(), tree)
+    walker.walk(OneListener(), tree)
+    walker.walk(PrimaryListener(), tree)
+    walker.walk(TwoListener(), tree)
 
 
 if __name__ == '__main__':
-    compile('semantic/input/anattributenamedself.cool')
+    compile('resources/semantic/input/badarith.cool')

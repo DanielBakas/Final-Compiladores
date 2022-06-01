@@ -1,4 +1,4 @@
-# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto Final/antlr/cool.g4 by ANTLR 4.9.3
+# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto Final/antlr/cool.g4 by ANTLR 4.10.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .coolParser import coolParser
@@ -74,8 +74,8 @@ class coolVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by coolParser#letExpr.
-    def visitLetExpr(self, ctx:coolParser.LetExprContext):
+    # Visit a parse tree produced by coolParser#lcleetExpr.
+    def visitLcleetExpr(self, ctx:coolParser.LcleetExprContext):
         return self.visitChildren(ctx)
 
 

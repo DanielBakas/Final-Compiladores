@@ -16,7 +16,7 @@ expr:
 	| IF expr THEN expr ELSE expr FI								# if
 	| WHILE expr LOOP expr POOL										# while
 	| expr '.' ID '(' (params += expr ( ',' params += expr)*)? ')'	# exprDispatch
-	| LET let_decl ( ',' let_decl)* IN expr							# letExpr
+	| LET let_decl ( ',' let_decl)* IN expr							# lcleetExpr
 	| CASE expr OF (case_stat)+ ESAC								# case
 	| NEW TYPE														# newType
 	| '{' ( expr ';')+ '}'											# block

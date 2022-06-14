@@ -1,7 +1,9 @@
 """
 ================================================================================
 # Proyecto Final de Compiladores
-Módulo | `SecondListener.py`
+Módulo | `HierarchyListener.py`
+
+Construye el arbol de clases. Establece las relaciones de herencia entre las clases.
 
 Daniel Bakas Amuchástegui   | A01657103
 Santiago Hernández Guerrero | A01027543

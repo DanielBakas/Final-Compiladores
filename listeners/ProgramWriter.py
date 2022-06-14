@@ -1,3 +1,19 @@
+"""
+================================================================================
+# Proyecto Final de Compiladores
+Módulo | `ProgramWriter.py`
+
+Genera el archivo de ensamblador a partir del arbol parseado. Solo generamos
+el segmento de datos para strings, ints y crea proto-objetos para cada clase.
+
+Daniel Bakas Amuchástegui   | A01657103
+Santiago Hernández Guerrero | A01027543
+
+Abril 19, 2022
+================================================================================
+"""
+
+
 from math import ceil
 
 from antlr import coolListener, coolParser
@@ -41,12 +57,14 @@ class ProgramWriter(coolListener):
         base = ['Object', 'IO', 'Int', 'Bool', 'String']
         for klass in base:
             self.addString(klass)
-            ntpiece += nameTabRowTemplate.substitute(idx=self.strIndexes[klass])
+            ntpiece += nameTabRowTemplate.substitute(
+                idx=self.strIndexes[klass])
         for klass in getAllClasses().keys():
             if klass in base:
                 continue
             self.addString(klass)
-            ntpiece += nameTabRowTemplate.substitute(idx=self.strIndexes[klass])
+            ntpiece += nameTabRowTemplate.substitute(
+                idx=self.strIndexes[klass])
         self.output += ntpiece
 
         # Obj table
@@ -57,22 +75,26 @@ class ProgramWriter(coolListener):
 
         # dispatch table
         for klassInstance in getAllClasses().values():
-            fragment = dispatchTableHeaderTemplate.substitute(objectname=klassInstance.name)
+            fragment = dispatchTableHeaderTemplate.substitute(
+                objectname=klassInstance.name)
             for obj, methods in klassInstance.getAllMethods().items():
                 for method in list(methods):
-                    fragment += dispatchTableRowTemplate.substitute(objectname=obj, methodname=method)
+                    fragment += dispatchTableRowTemplate.substitute(
+                        objectname=obj, methodname=method)
             self.output += fragment
 
         # proto objects
         counter = 0
         for klass in getAllClasses().values():
-            self.output += protoObjectTableHeaderTemplate.substitute(objectname=klass.name)
+            self.output += protoObjectTableHeaderTemplate.substitute(
+                objectname=klass.name)
             attrbus = []
             if klass.getAllAttributes():
                 for attr in klass.getAllAttributes().keys():
                     attrbus += wordTemplate.substitute(content=2)
             self.output += protoObjectTableTemplate.substitute(classCounter=counter,
-                                                               numberofRows=len(attrbus) + 3,
+                                                               numberofRows=len(
+                                                                   attrbus) + 3,
                                                                objname=klass.name)
             for a in attrbus:
                 self.output += a
@@ -122,6 +144,7 @@ class ProgramWriter(coolListener):
     def addInt(self, number):
         if number in self.intIndexes:
             return
-        intstr = intTemplate.substitute(idx=len(self.intIndexes), tag=self.intnum, value=number)
+        intstr = intTemplate.substitute(
+            idx=len(self.intIndexes), tag=self.intnum, value=number)
         self.intIndexes[number] = len(self.intPieces)
         self.intPieces.add(intstr)

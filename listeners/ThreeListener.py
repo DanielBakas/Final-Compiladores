@@ -15,13 +15,3 @@ class ThreeListener(coolListener):
     def enterKlass(self, ctx: coolParser.KlassContext):
         self.currentClass = ctx.dataType
 
-    def enterAttribute(self, ctx: coolParser.AttributeContext):
-        name = ctx.ID().getText()
-        type = ctx.TYPE().getText()
-
-        try:
-            ctx.currentClass.lookupAttribute(name)
-            raise attroverride
-        except KeyError:
-            ctx.currentClass.addAttribute(name, type)
-

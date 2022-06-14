@@ -47,18 +47,21 @@ class HierarchyListener(coolListener):
                 if type(param) == coolParser.FormalContext:
                     if param.ID().getText() in seen_param_names:
                         raise dupformals()
-                    parsed = frozenset([param.TYPE().getText(), param.ID().getText()])
+                    parsed = frozenset(
+                        [param.TYPE().getText(), param.ID().getText()])
                     seen_param_names.add(param.ID().getText())
                     parsedparams.add(parsed)
         try:
             method = Method(ctx.TYPE(), parsedparams)
-            overridenmethod = self.currentKlass.lookupMethod(ctx.ID().getText())
+            overridenmethod = self.currentKlass.lookupMethod(
+                ctx.ID().getText())
             if len(method.params) != len(overridenmethod.params):
                 raise signaturechange()
         except KeyError:
             pass
         try:
-            overridenmethod = self.currentKlass.lookupMethod(ctx.ID().getText())
+            overridenmethod = self.currentKlass.lookupMethod(
+                ctx.ID().getText())
             if method.params.values() != overridenmethod.params.values():
                 raise overridingmethod4()
         except KeyError:

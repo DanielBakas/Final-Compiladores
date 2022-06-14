@@ -63,6 +63,12 @@ class Klass():
         self.methods = SymbolTable()
         _allClasses[name] = self
 
+    def getAllAttributes(self):
+        return recursiveGetAllAttributes({}, self)
+
+    def getAllMethods(self):
+        return recursiveGetAllMethods({}, self)
+
     def validHierarchy(self):
         up = self.inherits
         # Buscar hacia arriba hasta llegar a object
@@ -356,6 +362,19 @@ def setBaseKlasses():
     k.addMethod('substr', Method('String', [('i', 'Int'), ('l', 'Int')]))
 
     k = Klass('Bool')
+
+def recursiveGetAllAttributes(output, klass):
+    output[klass.name] = klass.attributes
+    if klass.name == "Object":
+        return output
+    recursiveGetAllAttributes(output, lookupClass(klass.inherits))
+
+def recursiveGetAllMethods(output, klass):
+    output[klass.name] = list(klass.methods.keys())
+    if klass.name == "Object":
+        return output
+    if klass.inherits:
+        return recursiveGetAllMethods(output, lookupClass(klass.inherits))
 
 
 if __name__ == '__main__':

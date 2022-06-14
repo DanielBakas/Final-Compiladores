@@ -10,7 +10,9 @@ Abril 19, 2022
 ================================================================================
 """
 
-from antlr import *
+from antlr4 import *
+from antlr.coolLexer import coolLexer
+from antlr.coolParser import coolParser
 from listeners.HierarchyListener import HierarchyListener
 from listeners.OneListener import OneListener
 from listeners.ProgramWriter import ProgramWriter

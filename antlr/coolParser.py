@@ -1,4 +1,4 @@
-# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto Final/antlr/cool.g4 by ANTLR 4.10.1
+# Generated from C:/Users/X220/Desktop/dancompis/antlr\cool.g4 by ANTLR 4.10.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -106,7 +106,7 @@ class coolParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "';'", "'inherits'", "'{'", "'}'", "'('", 
-                     "','", "')'", "':'", "'<-'", "'.'", "'@'", "'\\u02DC'", 
+                     "','", "')'", "':'", "'<-'", "'.'", "'@'", "'\\u00CB\\u0153'", 
                      "'*'", "'/'", "'+'", "'-'", "'<'", "'<='", "'='", "'not'", 
                      "'=>'" ]
 
@@ -1632,33 +1632,43 @@ class coolParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self):
-            return self.getToken(coolParser.ID, 0)
-
-        def TYPE(self):
-            return self.getToken(coolParser.TYPE, 0)
-
-        def expr(self):
-            return self.getTypedRuleContext(coolParser.ExprContext,0)
-
 
         def getRuleIndex(self):
             return coolParser.RULE_case_stat
 
+     
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
+
+
+
+    class CasestatContext(Case_statContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a coolParser.Case_statContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self):
+            return self.getToken(coolParser.ID, 0)
+        def TYPE(self):
+            return self.getToken(coolParser.TYPE, 0)
+        def expr(self):
+            return self.getTypedRuleContext(coolParser.ExprContext,0)
+
+
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCase_stat" ):
-                listener.enterCase_stat(self)
+            if hasattr( listener, "enterCasestat" ):
+                listener.enterCasestat(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCase_stat" ):
-                listener.exitCase_stat(self)
+            if hasattr( listener, "exitCasestat" ):
+                listener.exitCasestat(self)
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCase_stat" ):
-                return visitor.visitCase_stat(self)
+            if hasattr( visitor, "visitCasestat" ):
+                return visitor.visitCasestat(self)
             else:
                 return visitor.visitChildren(self)
-
 
 
 
@@ -1667,6 +1677,7 @@ class coolParser ( Parser ):
         localctx = coolParser.Case_statContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_case_stat)
         try:
+            localctx = coolParser.CasestatContext(self, localctx)
             self.enterOuterAlt(localctx, 1)
             self.state = 207
             self.match(coolParser.ID)
@@ -1696,33 +1707,43 @@ class coolParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self):
-            return self.getToken(coolParser.ID, 0)
-
-        def TYPE(self):
-            return self.getToken(coolParser.TYPE, 0)
-
-        def expr(self):
-            return self.getTypedRuleContext(coolParser.ExprContext,0)
-
 
         def getRuleIndex(self):
             return coolParser.RULE_let_decl
 
+     
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
+
+
+
+    class LetdeclContext(Let_declContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a coolParser.Let_declContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self):
+            return self.getToken(coolParser.ID, 0)
+        def TYPE(self):
+            return self.getToken(coolParser.TYPE, 0)
+        def expr(self):
+            return self.getTypedRuleContext(coolParser.ExprContext,0)
+
+
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLet_decl" ):
-                listener.enterLet_decl(self)
+            if hasattr( listener, "enterLetdecl" ):
+                listener.enterLetdecl(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLet_decl" ):
-                listener.exitLet_decl(self)
+            if hasattr( listener, "exitLetdecl" ):
+                listener.exitLetdecl(self)
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLet_decl" ):
-                return visitor.visitLet_decl(self)
+            if hasattr( visitor, "visitLetdecl" ):
+                return visitor.visitLetdecl(self)
             else:
                 return visitor.visitChildren(self)
-
 
 
 
@@ -1732,6 +1753,7 @@ class coolParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_let_decl)
         self._la = 0 # Token type
         try:
+            localctx = coolParser.LetdeclContext(self, localctx)
             self.enterOuterAlt(localctx, 1)
             self.state = 214
             self.match(coolParser.ID)

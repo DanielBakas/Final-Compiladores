@@ -8,7 +8,7 @@ feature:
 	ID '(' (params += formal (',' params += formal)*)? ')' ':' TYPE '{' expr '}'	# method
 	| ID ':' TYPE ( '<-' expr)?														# attribute;
 
-formal: ID ':' TYPE;
+formal: ID ':' TYPE #formalexp;
 
 expr:
 	primary															# base
@@ -35,9 +35,9 @@ expr:
 	| 'not' expr					# not
 	| <assoc = right> ID '<-' expr	# assign;
 
-case_stat: ID ':' TYPE '=>' expr ';';
+case_stat: ID ':' TYPE '=>' expr ';' #casestat;
 
-let_decl: ID ':' TYPE ('<-' expr)?;
+let_decl: ID ':' TYPE ('<-' expr)? #letdecl;
 
 primary:
 	'(' expr ')'	# parenthesis

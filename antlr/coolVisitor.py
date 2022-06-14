@@ -1,4 +1,4 @@
-# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto Final/antlr/cool.g4 by ANTLR 4.10.1
+# Generated from C:/Users/X220/Desktop/dancompis/antlr\cool.g4 by ANTLR 4.10.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .coolParser import coolParser
@@ -139,13 +139,13 @@ class coolVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by coolParser#case_stat.
-    def visitCase_stat(self, ctx:coolParser.Case_statContext):
+    # Visit a parse tree produced by coolParser#casestat.
+    def visitCasestat(self, ctx:coolParser.CasestatContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by coolParser#let_decl.
-    def visitLet_decl(self, ctx:coolParser.Let_declContext):
+    # Visit a parse tree produced by coolParser#letdecl.
+    def visitLetdecl(self, ctx:coolParser.LetdeclContext):
         return self.visitChildren(ctx)
 
 

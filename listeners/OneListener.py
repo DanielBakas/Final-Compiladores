@@ -29,10 +29,9 @@ class OneListener(coolListener):
         if ctx.expr() and ctx.expr().getText() == 'self':
             raise selfassignment()
 
-    def enterLet_decl(self, ctx: coolParser.Let_declContext):
-        for token in ctx.getTokens(42):
-            if token.getText() == 'self':
-                raise letself()
+    def enterLetdecl(self, ctx:coolParser.LetdeclContext):
+        if ctx.ID().getText() == 'self':
+            raise letself()
 
     def enterMethod(self, ctx: coolParser.MethodContext):
         for param in ctx.params:

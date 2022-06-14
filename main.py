@@ -14,7 +14,7 @@ from antlr4 import *
 from antlr import *
 from listeners.OneListener import OneListener
 from listeners.TwoListener import TwoListener
-from listeners.PrimaryListener import PrimaryListener
+from listeners.HierarchyListener import HierarchyListener
 from util.structure import setBaseKlasses
 
 
@@ -25,7 +25,7 @@ def compile(file):
     setBaseKlasses()
     walker = ParseTreeWalker()
     walker.walk(OneListener(), tree)
-    walker.walk(PrimaryListener(), tree)
+    walker.walk(HierarchyListener(), tree)
     walker.walk(TwoListener(), tree)
 
 

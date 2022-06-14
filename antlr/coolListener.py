@@ -1,4 +1,4 @@
-# Generated from /Users/danielbakas/Documents/Escuela/Tec/Semestre 8/Diseño de Compiladores/Proyecto Final/antlr/cool.g4 by ANTLR 4.10.1
+# Generated from C:/Users/X220/Desktop/dancompis/antlr\cool.g4 by ANTLR 4.10.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .coolParser import coolParser
@@ -242,21 +242,21 @@ class coolListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by coolParser#case_stat.
-    def enterCase_stat(self, ctx:coolParser.Case_statContext):
+    # Enter a parse tree produced by coolParser#casestat.
+    def enterCasestat(self, ctx:coolParser.CasestatContext):
         pass
 
-    # Exit a parse tree produced by coolParser#case_stat.
-    def exitCase_stat(self, ctx:coolParser.Case_statContext):
+    # Exit a parse tree produced by coolParser#casestat.
+    def exitCasestat(self, ctx:coolParser.CasestatContext):
         pass
 
 
-    # Enter a parse tree produced by coolParser#let_decl.
-    def enterLet_decl(self, ctx:coolParser.Let_declContext):
+    # Enter a parse tree produced by coolParser#letdecl.
+    def enterLetdecl(self, ctx:coolParser.LetdeclContext):
         pass
 
-    # Exit a parse tree produced by coolParser#let_decl.
-    def exitLet_decl(self, ctx:coolParser.Let_declContext):
+    # Exit a parse tree produced by coolParser#letdecl.
+    def exitLetdecl(self, ctx:coolParser.LetdeclContext):
         pass
 
 
